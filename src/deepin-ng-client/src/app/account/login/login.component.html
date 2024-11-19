@@ -1,0 +1,34 @@
+<mat-card class="account-card">
+    <mat-card-header>
+        <mat-card-title>Sign In</mat-card-title>
+        <mat-card-subtitle>Sign in to your account.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="email" placeholder="Email address">
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Enter your password</mat-label>
+                <input formControlName="password" matInput [type]="showPassword ? 'text' : 'password'">
+                <button mat-icon-button matSuffix (click)="showPassword = !showPassword"
+                    [attr.aria-label]="'Show password'" [attr.aria-pressed]="!showPassword">
+                    <mat-icon>{{showPassword ? 'visibility':'visibility_off' }}</mat-icon>
+                </button>
+            </mat-form-field>
+            <button class="full-width" [disabled]="isLoading || form.invalid" mat-flat-button color="primary"
+                type="submit">Sign In</button>
+        </form>
+    </mat-card-content>
+    <mat-card-footer>
+        <p class="footer-text">
+            Don't have an account?
+            <a mat-button [routerLink]="['/account/sign-up']">Sign up</a>
+        </p>
+        <p class="footer-text">
+            Forgot your password?
+            <a mat-button [routerLink]="['/account/forgot-password']">Reset</a>
+        </p>
+    </mat-card-footer>
+</mat-card>

@@ -37,6 +37,8 @@ public static class WebApplicationExtensions
     }
     public static WebApplication ConfigureApplicationService(this WebApplication app)
     {
+        app.UseDefaultFiles();
+        app.MapStaticAssets();
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
@@ -55,6 +57,8 @@ public static class WebApplicationExtensions
         app.MapGroup("identity").MapIdentityApi<User>();
 
         app.MapControllers();
+
+        app.MapFallbackToFile("/index.html");
 
         return app;
     }

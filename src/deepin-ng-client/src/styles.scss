@@ -1,0 +1,84 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define a dark theme
+$dark-theme: mat.define-theme((color: (theme-type: dark,
+        primary: mat.$green-palette,
+        tertiary: mat.$violet-palette,
+      ),
+    ));
+
+// Define a light theme
+$light-theme: mat.define-theme((color: (theme-type: light,
+        primary: mat.$green-palette,
+        tertiary: mat.$violet-palette,
+      ),
+    ));
+
+.light-theme {
+  @include mat.all-component-themes($light-theme);
+}
+
+.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+}
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  --default-gap: 10px;
+  --default-padding: 8px;
+  --default-margin: 8px;
+  --default-border-radius: 8px;
+  --default-avatar-size: 48px;
+  --default-avatar-border-radius: 50%;
+
+  @include mat.all-component-themes($light-theme);
+
+  // @media (prefers-color-scheme: dark) {
+  //   @include mat.all-component-themes($dark-theme);
+  // }
+}
+
+// Comment out the line below if you want to use the pre-defined typography utility classes.
+// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
+// @include mat.typography-hierarchy($deepin-ng-client-theme);
+
+// Comment out the line below if you want to use the deprecated `color` inputs.
+// @include mat.color-variants-backwards-compatibility($deepin-ng-client-theme);
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mr-1 {
+  margin-right: var(--default-gap);
+}
+
+.ml-1 {
+  margin-left: var(--default-gap);
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}

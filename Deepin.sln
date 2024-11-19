@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3DFAE464-73A6-41E7-9928-E51FE979A608}"
 EndProject
@@ -19,6 +19,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deepin.Domain", "src\Deepin.Domain\Deepin.Domain.csproj", "{C8AE3963-85ED-4C0F-954E-D346034C72E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deepin.Server", "src\Deepin.Server\Deepin.Server.csproj", "{CE4584A4-BD39-492B-A3C8-F3C258CAFF58}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "deepin-ng-client", "src\deepin-ng-client\deepin-ng-client.esproj", "{52AA3F26-DA71-47A9-930C-B2BB3A641B68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,12 @@ Global
 		{CE4584A4-BD39-492B-A3C8-F3C258CAFF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE4584A4-BD39-492B-A3C8-F3C258CAFF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE4584A4-BD39-492B-A3C8-F3C258CAFF58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52AA3F26-DA71-47A9-930C-B2BB3A641B68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52AA3F26-DA71-47A9-930C-B2BB3A641B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52AA3F26-DA71-47A9-930C-B2BB3A641B68}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{52AA3F26-DA71-47A9-930C-B2BB3A641B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52AA3F26-DA71-47A9-930C-B2BB3A641B68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52AA3F26-DA71-47A9-930C-B2BB3A641B68}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,5 +59,6 @@ Global
 		{799BE0D2-D313-4DBF-84FC-FE80BAC6F022} = {3DFAE464-73A6-41E7-9928-E51FE979A608}
 		{C8AE3963-85ED-4C0F-954E-D346034C72E3} = {3DFAE464-73A6-41E7-9928-E51FE979A608}
 		{CE4584A4-BD39-492B-A3C8-F3C258CAFF58} = {3DFAE464-73A6-41E7-9928-E51FE979A608}
+		{52AA3F26-DA71-47A9-930C-B2BB3A641B68} = {3DFAE464-73A6-41E7-9928-E51FE979A608}
 	EndGlobalSection
 EndGlobal
