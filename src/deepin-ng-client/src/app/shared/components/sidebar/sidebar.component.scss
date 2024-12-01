@@ -1,0 +1,26 @@
+:host {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+
+.categories {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    transition: scrollbar-color 0.5s ease;
+    -webkit-overflow-scrolling: touch;
+    border-top: 1px solid var(--border-color);
+}
+
+.fixed-categories {
+    border-top: 1px solid var(--border-color);
+}
+.category-header{
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -1,4 +1,3 @@
-using System;
 using MediatR;
 
 namespace Deepin.Application.Commands.Tags;

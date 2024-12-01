@@ -1,0 +1,9 @@
+:host{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+.pageContentContaner{
+    flex: 1 1 auto;
+    padding: .75rem;
+}

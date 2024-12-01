@@ -130,9 +130,15 @@ namespace Deepin.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("display_order");
 
-                    b.Property<int>("Level")
-                        .HasColumnType("integer")
-                        .HasColumnName("level");
+                    b.Property<string>("Icon")
+                        .HasColumnType("text")
+                        .HasColumnName("icon");
+
+                    b.Property<bool>("IsBuiltIn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_builtin");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -142,15 +148,6 @@ namespace Deepin.Infrastructure.Migrations
                     b.Property<int>("ParentId")
                         .HasColumnType("integer")
                         .HasColumnName("parent_id");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("text")
-                        .HasColumnName("path");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("slug");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
@@ -256,6 +253,98 @@ namespace Deepin.Infrastructure.Migrations
                     b.ToTable("tags", "deepin");
                 });
 
+            modelBuilder.Entity("Deepin.Domain.NoteAggregates.NoteTag", b =>
+                {
+                    b.Property<int>("NoteId")
+                        .HasColumnType("integer")
+                        .HasColumnName("note_id");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("integer")
+                        .HasColumnName("tag_id");
+
+                    b.HasKey("NoteId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("note_tags", "deepin");
+                });
+
+            modelBuilder.Entity("Deepin.Domain.PageAggregates.Note", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("content");
+
+                    b.Property<Guid?>("CoverImageId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("cover_image_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_public");
+
+                    b.Property<DateTime?>("PublishedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("published_at");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("status");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("update_at")
+                        .HasDefaultValueSql("now()");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("notes", "deepin");
+                });
+
             modelBuilder.Entity("Deepin.Domain.PostAggregates.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -281,34 +370,6 @@ namespace Deepin.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("created_by");
 
-                    b.Property<bool>("IsPublic")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_public");
-
-                    b.Property<DateTime?>("PublishedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("published_at");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("slug");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("status");
-
-                    b.Property<string>("Summary")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("summary");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("title");
-
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
@@ -318,23 +379,6 @@ namespace Deepin.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("posts", "deepin");
-                });
-
-            modelBuilder.Entity("Deepin.Domain.PostAggregates.PostCategory", b =>
-                {
-                    b.Property<int>("PostId")
-                        .HasColumnType("integer")
-                        .HasColumnName("post_id");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("category_id");
-
-                    b.HasKey("PostId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("post_categories", "deepin");
                 });
 
             modelBuilder.Entity("Deepin.Domain.PostAggregates.PostTag", b =>
@@ -586,17 +630,17 @@ namespace Deepin.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Deepin.Domain.PostAggregates.PostCategory", b =>
+            modelBuilder.Entity("Deepin.Domain.NoteAggregates.NoteTag", b =>
                 {
-                    b.HasOne("Deepin.Domain.Entities.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
+                    b.HasOne("Deepin.Domain.PageAggregates.Note", null)
+                        .WithMany("NoteTags")
+                        .HasForeignKey("NoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Deepin.Domain.PostAggregates.Post", null)
-                        .WithMany("PostCategories")
-                        .HasForeignKey("PostId")
+                    b.HasOne("Deepin.Domain.Entities.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -676,10 +720,13 @@ namespace Deepin.Infrastructure.Migrations
                     b.Navigation("CommentLikes");
                 });
 
+            modelBuilder.Entity("Deepin.Domain.PageAggregates.Note", b =>
+                {
+                    b.Navigation("NoteTags");
+                });
+
             modelBuilder.Entity("Deepin.Domain.PostAggregates.Post", b =>
                 {
-                    b.Navigation("PostCategories");
-
                     b.Navigation("PostTags");
                 });
 

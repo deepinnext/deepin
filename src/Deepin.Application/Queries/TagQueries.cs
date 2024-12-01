@@ -18,6 +18,12 @@ public class TagQueries(IDistributedCache cache, IMapper mapper, DeepinDbContext
         return tag is null ? null : _mapper.Map<TagDto>(tag);
     }
 
+    public async Task<TagDto?> GetByNameAsync(string name, CancellationToken cancellationToken)
+    {
+        var tags = await GetListAsync(cancellationToken);
+        return tags?.FirstOrDefault(x => x.Name == name);
+    }
+
     public async Task<IEnumerable<TagDto>?> GetListAsync(CancellationToken cancellationToken)
     {
         return await _cache.GetOrCreateAsync(CacheKeys.GetAllTags(), async () =>

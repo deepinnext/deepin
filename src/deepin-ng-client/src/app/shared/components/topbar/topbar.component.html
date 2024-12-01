@@ -1,0 +1,29 @@
+<mat-toolbar>
+    <span>DEEPIN</span>
+    <!-- <form class="search-form">
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Search">
+        </mat-form-field>
+    </form> -->
+    <div class="profileMenu">
+        <button mat-icon-button (click)="toggleTheme()">
+            <mat-icon>
+                {{ isLightTheme ? 'light_mode' : 'dark_mode' }}
+            </mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+            <mat-icon>person</mat-icon>
+        </button>
+        <mat-menu #profileMenu="matMenu" xPosition="before" yPosition="below">
+            <button mat-menu-item>
+                Profile
+            </button>
+            <button mat-menu-item>
+                Sign out
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>

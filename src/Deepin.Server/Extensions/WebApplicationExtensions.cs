@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using Deepin.Domain.RoleAggregates;
 
 namespace Deepin.Server.Extensions;
 
@@ -66,6 +67,7 @@ public static class WebApplicationExtensions
     {
         services
         .AddIdentityApiEndpoints<User>()
+        .AddRoles<Role>()
         .AddEntityFrameworkStores<DeepinDbContext>();
 
         services.Configure<IdentityOptions>(options =>

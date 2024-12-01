@@ -1,5 +1,3 @@
-using System;
-using Deepin.Application.Queries;
 using Deepin.Infrastructure;
 using MediatR;
 

@@ -25,6 +25,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPostQueries, PostQueries>();
         services.AddScoped<ITagQueries, TagQueries>();
         services.AddScoped<ICategoryQueries, CategoryQueries>();
+        services.AddScoped<INoteQueries, NoteQueries>();
         return services;
     }
 }

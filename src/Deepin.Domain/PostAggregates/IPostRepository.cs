@@ -1,5 +1,3 @@
-using System;
-
 namespace Deepin.Domain.PostAggregates;
 
 public interface IPostRepository : IRepository<Post>

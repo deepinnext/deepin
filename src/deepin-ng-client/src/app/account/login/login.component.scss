@@ -1,23 +1,24 @@
-.account-card {
+.login-card {
     width: 100%;
-    max-width: 400px;
+    max-width: 25rem;
 }
 
-mat-form-field {
-    width: 100%;
+mat-card-title {
+    font-size: 1.5rem;
+    font-family: 'Courier New';
+    font-weight: 600;
 }
 
-.footer-text {
-    font-size: 0.875rem;
-    text-align: center;
+mat-card-subtitle {
+    font-size: .85rem;
+    margin: .25rem 0;
+}
 
-    a {
-        color: var(--primary, #6200ea);
-        text-decoration: none;
-        font-weight: 500;
+.full-width {
+    width: 100%;
+    margin-bottom: .75rem;
+}
 
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+.forgot-password {
+    margin-right: auto;
 }

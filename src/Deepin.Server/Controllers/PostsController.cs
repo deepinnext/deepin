@@ -1,19 +1,21 @@
 using Deepin.Application.Commands.Posts;
 using Deepin.Application.Queries;
+using Deepin.Application.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Deepin.Server.Controllers
 {
-    public class PostsController(IMediator mediator, IPostQueries postQueries) : ApiControllerBase
+    public class PostsController(IMediator mediator, IUserContext userContext, IPostQueries postQueries) : ApiControllerBase
     {
         private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        private readonly IUserContext _userContext = userContext ?? throw new ArgumentNullException(nameof(userContext));
         private readonly IPostQueries _postQueries = postQueries ?? throw new ArgumentNullException(nameof(postQueries));
 
         [HttpGet]
-        public async Task<IActionResult> SearchPostsAsync([FromQuery] PostPagedQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> SearchAsync([FromQuery] PostQuery query, CancellationToken cancellationToken)
         {
-            var result = await _postQueries.GetListAsync(query, cancellationToken);
+            var result = await _postQueries.GetListAsync(_userContext.UserId, query, cancellationToken);
             return Ok(result);
         }
 

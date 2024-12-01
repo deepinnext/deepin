@@ -1,4 +1,3 @@
-using System;
 using Deepin.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

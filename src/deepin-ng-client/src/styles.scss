@@ -24,10 +24,12 @@ $light-theme: mat.define-theme((color: (theme-type: light,
 
 .light-theme {
   @include mat.all-component-themes($light-theme);
+  --border-color: rgba(0, 0, 0, 0.1);
 }
 
 .dark-theme {
   @include mat.all-component-themes($dark-theme);
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 
 // Include theme styles for core and each component used in your app.
@@ -40,12 +42,13 @@ $light-theme: mat.define-theme((color: (theme-type: light,
   --default-border-radius: 8px;
   --default-avatar-size: 48px;
   --default-avatar-border-radius: 50%;
+  --topbar-height: 64px;
 
   @include mat.all-component-themes($light-theme);
 
-  // @media (prefers-color-scheme: dark) {
-  //   @include mat.all-component-themes($dark-theme);
-  // }
+  @media (prefers-color-scheme: dark) {
+    @include mat.all-component-themes($dark-theme);
+  }
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.
@@ -58,6 +61,7 @@ $light-theme: mat.define-theme((color: (theme-type: light,
 
 html,
 body {
+  font-size: 100%;
   height: 100%;
 }
 

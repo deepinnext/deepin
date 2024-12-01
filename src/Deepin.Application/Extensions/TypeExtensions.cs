@@ -1,5 +1,3 @@
-using System;
-
 namespace Deepin.Application;
 
 public static class TypeExtensions

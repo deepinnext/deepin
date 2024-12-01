@@ -1,5 +1,3 @@
-using System;
-
 namespace Deepin.Application.Models;
 
 public class PagedResult<T>

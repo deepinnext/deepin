@@ -1,0 +1,51 @@
+<mat-nav-list>
+    <a mat-list-item [activated]="isActived('home')" routerLink="/home">
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span>Home</span>
+    </a>
+    <a mat-list-item routerLink="/home" routerLinkActive="activated">
+        <mat-icon matListItemIcon>list</mat-icon>
+        <span>Feeds</span>
+    </a>
+    <a mat-list-item routerLink="/spaces">
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <span>Files</span>
+    </a>
+
+    <a mat-list-item routerLink="/templates">
+        <mat-icon matListItemIcon>dataset</mat-icon>
+        <span>Templates</span>
+    </a>
+    <mat-list-item routerLink="/settings">
+        <mat-icon matListItemIcon>settings</mat-icon>
+        <span>Settings</span>
+    </mat-list-item>
+</mat-nav-list>
+<div class="categories">
+    <div class="category-header">
+        <span>Notes</span>
+        <button mat-icon-button>
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <mat-nav-list>
+        @for (category of categories; track category) {
+        <a mat-list-item [routerLink]="['/page','new']" [queryParams]="{cid:category.id}">
+            <mat-icon matListItemIcon>{{category.icon}}</mat-icon>
+            <span>{{category.name}}</span>
+        </a>
+        }
+    </mat-nav-list>
+</div>
+<div class="fixed-categories">
+    <mat-nav-list>
+        <mat-list-item>
+            <mat-icon matListItemIcon>archive</mat-icon>
+            <span>Archive</span>
+        </mat-list-item>
+        <mat-list-item>
+            <mat-icon matListItemIcon>delete</mat-icon>
+            <span>Trash</span>
+        </mat-list-item>
+    </mat-nav-list>
+</div>

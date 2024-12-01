@@ -1,0 +1,47 @@
+<form *ngIf="form" [formGroup]="form">
+    <div class="form-actions">
+        <ng-container *ngIf="isNew">
+            <button mat-flat-button>Save</button>
+            <button mat-button>Publish</button>
+        </ng-container>
+        <ng-container *ngIf="!isNew">
+            <button mat-button>Cancel</button>
+            <button mat-flat-button>Save</button>
+            <button mat-icon-button [matMenuTriggerFor]="pageActionMenu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #pageActionMenu="matMenu" xPosition="before" yPosition="below">
+                <button mat-menu-item>
+                    Unpublish
+                </button>
+                <button mat-menu-item>
+                    Archive
+                </button>
+                <button mat-menu-item>
+                    Delete
+                </button>
+            </mat-menu>
+        </ng-container>
+    </div>
+    <div class="form-banner">
+        <h1 contenteditable="true" class="form-field">
+            Untitled page.
+        </h1>
+        <p contenteditable="true" class="form-field">Enter a description for this page.</p>
+    </div>
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tags</mat-label>
+        <mat-chip-grid #reactiveChipGrid aria-label="Enter reactive form keywords" formControlName="tags">
+            @for (tag of tags; track tag) {
+            <mat-chip-row (removed)="removeTag(tag)">
+                {{tag}}
+                <button matChipRemove aria-label="'remove reactive form' + keyword">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip-row>
+            }
+        </mat-chip-grid>
+        <input placeholder="New tag..." [matChipInputFor]="reactiveChipGrid" (matChipInputTokenEnd)="addTag($event)" />
+    </mat-form-field>
+    <app-tinymce-editor></app-tinymce-editor>
+</form>

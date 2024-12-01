@@ -5,6 +5,7 @@ using Deepin.Infrastructure.FileStorage;
 using Deepin.Infrastructure.BlobStorage;
 using Deepin.Domain.PostAggregates;
 using Deepin.Infrastructure.Repositories;
+using Deepin.Domain.NoteAggregates;
 
 namespace Deepin.Infrastructure.Extensions;
 public static class ServiceCollectionExtensions
@@ -32,6 +33,7 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddRepository(this IServiceCollection services)
     {
         services.AddScoped<IPostRepository, PostRepository>();
+        services.AddScoped<INoteRepository, NoteRepository>();
         return services;
     }
     private static IServiceCollection AddCaching(this IServiceCollection services, AppSettings appSettings)
@@ -41,7 +43,6 @@ public static class ServiceCollectionExtensions
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = appSettings.RedisConnection;
-                options.InstanceName = "deepin-server";
             });
         }
         else

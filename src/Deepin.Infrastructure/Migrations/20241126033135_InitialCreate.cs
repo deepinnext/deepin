@@ -24,12 +24,11 @@ namespace Deepin.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     parent_id = table.Column<int>(type: "integer", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
-                    slug = table.Column<string>(type: "text", nullable: false),
-                    level = table.Column<int>(type: "integer", nullable: false),
+                    icon = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
-                    path = table.Column<string>(type: "text", nullable: true),
                     display_order = table.Column<int>(type: "integer", nullable: false),
                     created_by = table.Column<string>(type: "text", nullable: false),
+                    is_builtin = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     update_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
@@ -78,22 +77,42 @@ namespace Deepin.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "notes",
+                schema: "deepin",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    category_id = table.Column<int>(type: "integer", nullable: false),
+                    status = table.Column<string>(type: "text", nullable: false),
+                    title = table.Column<string>(type: "text", nullable: false),
+                    content = table.Column<string>(type: "text", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
+                    cover_image_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_by = table.Column<string>(type: "text", nullable: false),
+                    is_public = table.Column<bool>(type: "boolean", nullable: false),
+                    is_deleted = table.Column<bool>(type: "boolean", nullable: false),
+                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    update_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    deleted_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    published_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_notes", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "posts",
                 schema: "deepin",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    status = table.Column<string>(type: "text", nullable: false),
-                    title = table.Column<string>(type: "text", nullable: false),
-                    slug = table.Column<string>(type: "text", nullable: false),
                     content = table.Column<string>(type: "text", nullable: false),
-                    summary = table.Column<string>(type: "text", nullable: false),
-                    is_public = table.Column<bool>(type: "boolean", nullable: false),
                     created_by = table.Column<string>(type: "text", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    update_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    published_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    update_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -188,33 +207,6 @@ namespace Deepin.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "post_categories",
-                schema: "deepin",
-                columns: table => new
-                {
-                    post_id = table.Column<int>(type: "integer", nullable: false),
-                    category_id = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_post_categories", x => new { x.post_id, x.category_id });
-                    table.ForeignKey(
-                        name: "FK_post_categories_categories_category_id",
-                        column: x => x.category_id,
-                        principalSchema: "deepin",
-                        principalTable: "categories",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_post_categories_posts_post_id",
-                        column: x => x.post_id,
-                        principalSchema: "deepin",
-                        principalTable: "posts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "role_claims",
                 schema: "deepin",
                 columns: table => new
@@ -242,6 +234,33 @@ namespace Deepin.Infrastructure.Migrations
                         principalSchema: "deepin",
                         principalTable: "roles",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "note_tags",
+                schema: "deepin",
+                columns: table => new
+                {
+                    note_id = table.Column<int>(type: "integer", nullable: false),
+                    tag_id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_note_tags", x => new { x.note_id, x.tag_id });
+                    table.ForeignKey(
+                        name: "FK_note_tags_notes_note_id",
+                        column: x => x.note_id,
+                        principalSchema: "deepin",
+                        principalTable: "notes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_note_tags_tags_tag_id",
+                        column: x => x.tag_id,
+                        principalSchema: "deepin",
+                        principalTable: "tags",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -372,10 +391,10 @@ namespace Deepin.Infrastructure.Migrations
                 column: "comment_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_post_categories_category_id",
+                name: "IX_note_tags_tag_id",
                 schema: "deepin",
-                table: "post_categories",
-                column: "category_id");
+                table: "note_tags",
+                column: "tag_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_post_tags_tag_id",
@@ -445,6 +464,10 @@ namespace Deepin.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "categories",
+                schema: "deepin");
+
+            migrationBuilder.DropTable(
                 name: "comment_likes",
                 schema: "deepin");
 
@@ -453,7 +476,7 @@ namespace Deepin.Infrastructure.Migrations
                 schema: "deepin");
 
             migrationBuilder.DropTable(
-                name: "post_categories",
+                name: "note_tags",
                 schema: "deepin");
 
             migrationBuilder.DropTable(
@@ -485,7 +508,7 @@ namespace Deepin.Infrastructure.Migrations
                 schema: "deepin");
 
             migrationBuilder.DropTable(
-                name: "categories",
+                name: "notes",
                 schema: "deepin");
 
             migrationBuilder.DropTable(

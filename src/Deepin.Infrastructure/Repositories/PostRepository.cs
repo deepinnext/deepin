@@ -1,4 +1,3 @@
-using System;
 using Deepin.Domain;
 using Deepin.Domain.PostAggregates;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +13,6 @@ public class PostRepository(DeepinDbContext dbContext) : IPostRepository
     {
         return await _dbContext.Posts
             .Include(p => p.PostTags)
-            .Include(p => p.PostCategories)
             .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
     }
     public async Task AddAsync(Post post, CancellationToken cancellationToken = default)

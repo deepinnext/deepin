@@ -14,7 +14,7 @@ public class UpdateCategoryCommandHandler(DeepinDbContext dbContext) : IRequestH
         {
             throw new DomainException($"Category with id {request.Id} not found.");
         }
-        category.Update(request.Name, request.Description);
+        category.Update(request.Name, request.Icon, request.Description);
         await _dbContext.SaveEntitiesAsync(cancellationToken);
         return Unit.Value;
     }

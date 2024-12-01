@@ -2,6 +2,7 @@
 using Deepin.Domain;
 using Deepin.Domain.CommentAggregates;
 using Deepin.Domain.Entities;
+using Deepin.Domain.PageAggregates;
 using Deepin.Domain.PostAggregates;
 using Deepin.Domain.RoleAggregates;
 using Deepin.Domain.UserAggregates;
@@ -23,6 +24,7 @@ public class DeepinDbContext(DbContextOptions options, IMediator? mediator = nul
     public DbSet<Category> Categories { get; set; } = null!;
     public DbSet<Tag> Tags { get; set; } = null!;
     public DbSet<Post> Posts { get; set; } = null!;
+    public DbSet<Note> Notes { get; set; } = null!;
     public DbSet<Comment> Comments { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,10 +34,11 @@ public class DeepinDbContext(DbContextOptions options, IMediator? mediator = nul
         modelBuilder.ApplyConfiguration(new CategoryEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new TagEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new PostEntityTypeConfiguration());
-        modelBuilder.ApplyConfiguration(new PostCategoryEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new PostTagEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new CommentEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new CommentLikeEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new NoteEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new NoteTagEntityTypeConfiguration());
 
         modelBuilder.Entity<Role>(b =>
         {
