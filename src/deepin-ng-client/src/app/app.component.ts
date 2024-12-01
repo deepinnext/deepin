@@ -3,13 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { LayoutService, ThemeType } from './core/services/layout.service';
 
 @Component({
-  selector: 'deepin-root',
-  standalone: true,
-  imports: [
-    RouterOutlet
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'deepin-root',
+    imports: [
+        RouterOutlet
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   constructor(private layoutService: LayoutService) {

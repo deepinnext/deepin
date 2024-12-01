@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { MatList, MatListItem } from '@angular/material/list';
 
 @Component({
-  selector: 'deepin-catalog',
-  standalone: true,
-  templateUrl: './catalog.component.html',
-  styleUrl: './catalog.component.scss',
-  imports: [
-    MatList,
-    MatListItem
-  ],
+    selector: 'deepin-catalog',
+    templateUrl: './catalog.component.html',
+    styleUrl: './catalog.component.scss',
+    imports: [
+        MatList,
+        MatListItem
+    ]
 })
 export class CatalogComponent {
   list: { name: string, id: number }[] =  [

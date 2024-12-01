@@ -13,26 +13,25 @@ import { MatDivider } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
-  selector: 'app-edit',
-  standalone: true,
-  templateUrl: './edit.component.html',
-  styleUrl: './edit.component.scss',
-  imports: [
-    NgIf,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatLabel,
-    MatFormField,
-    MatInput,
-    MatChipsModule,
-    MatIcon,
-    MatCardModule,
-    MatButton,
-    MatIconButton,
-    MatDivider,
-    MatMenuModule,
-    TinymceEditorComponent
-  ],
+    selector: 'app-edit',
+    templateUrl: './edit.component.html',
+    styleUrl: './edit.component.scss',
+    imports: [
+        NgIf,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatLabel,
+        MatFormField,
+        MatInput,
+        MatChipsModule,
+        MatIcon,
+        MatCardModule,
+        MatButton,
+        MatIconButton,
+        MatDivider,
+        MatMenuModule,
+        TinymceEditorComponent
+    ]
 })
 export class EditComponent implements OnInit {
   form?: FormGroup;

@@ -10,21 +10,20 @@ import { AuthService } from '../../core/services/auth.service';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'account-login',
-  standalone: true,
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
-  imports: [
-    NgIf,
-    RouterLink,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButton,
-    MatIcon,
-    MatIconButton,
-    MatCardModule
-  ]
+    selector: 'account-login',
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss',
+    imports: [
+        NgIf,
+        RouterLink,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButton,
+        MatIcon,
+        MatIconButton,
+        MatCardModule
+    ]
 })
 export class LoginComponent {
   form?: FormGroup;

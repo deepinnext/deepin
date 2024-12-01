@@ -9,20 +9,19 @@ import { CategoryService } from '../../../core/services/category.service';
 import { CategoryDto } from '../../../core/models/category.model';
 
 @Component({
-  selector: 'deepin-sidebar',
-  standalone: true,
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss',
-  imports: [
-    RouterLink,
-    RouterLinkActive,
-    MatIcon,
-    MatDivider,
-    MatListModule,
-    MatMiniFabButton,
-    MatToolbar,
-    MatIconButton
-  ]
+    selector: 'deepin-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrl: './sidebar.component.scss',
+    imports: [
+        RouterLink,
+        RouterLinkActive,
+        MatIcon,
+        MatDivider,
+        MatListModule,
+        MatMiniFabButton,
+        MatToolbar,
+        MatIconButton
+    ]
 })
 export class SidebarComponent implements OnInit {
   categories: CategoryDto[] = [];

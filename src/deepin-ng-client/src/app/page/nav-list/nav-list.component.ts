@@ -5,14 +5,13 @@ import { PostDto, PostPagedQuery } from '../../core/models/post.model';
 import { MatList, MatListItem } from '@angular/material/list';
 
 @Component({
-  selector: 'deepin-nav-list',
-  standalone: true,
-  templateUrl: './nav-list.component.html',
-  styleUrl: './nav-list.component.scss',
-  imports: [
-    MatList,
-    MatListItem
-  ],
+    selector: 'deepin-nav-list',
+    templateUrl: './nav-list.component.html',
+    styleUrl: './nav-list.component.scss',
+    imports: [
+        MatList,
+        MatListItem
+    ]
 })
 export class NavListComponent implements OnInit {
   query: PostPagedQuery = {

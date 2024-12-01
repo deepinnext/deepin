@@ -8,22 +8,21 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LayoutService, ThemeType } from '../../../core/services/layout.service';
 
 @Component({
-  selector: 'deepin-topbar',
-  standalone: true,
-  imports: [
-    MatToolbar,
-    MatInput,
-    MatIcon,
-    MatIconButton,
-    MatButton,
-    MatMenu,
-    MatMenuTrigger,
-    MatMenuItem,
-    MatSlideToggleModule,
-    MatFormField
-  ],
-  templateUrl: './topbar.component.html',
-  styleUrl: './topbar.component.scss'
+    selector: 'deepin-topbar',
+    imports: [
+        MatToolbar,
+        MatInput,
+        MatIcon,
+        MatIconButton,
+        MatButton,
+        MatMenu,
+        MatMenuTrigger,
+        MatMenuItem,
+        MatSlideToggleModule,
+        MatFormField
+    ],
+    templateUrl: './topbar.component.html',
+    styleUrl: './topbar.component.scss'
 })
 export class TopbarComponent {
   isLightTheme = true;

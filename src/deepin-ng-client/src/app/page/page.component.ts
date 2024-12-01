@@ -4,14 +4,13 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { NavListComponent } from "./nav-list/nav-list.component";
 
 @Component({
-  selector: 'app-page',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    NavListComponent,
-],
-  templateUrl: './page.component.html',
-  styleUrl: './page.component.scss'
+    selector: 'app-page',
+    imports: [
+        RouterOutlet,
+        NavListComponent,
+    ],
+    templateUrl: './page.component.html',
+    styleUrl: './page.component.scss'
 })
 export class PageComponent {
 

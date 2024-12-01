@@ -11,21 +11,20 @@ import { ACOCUNT_ROUTERS } from '../../core/constants/route.config';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
-  imports: [
-    NgIf,
-    RouterLink,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButton,
-    MatIconButton,
-    MatIcon
-  ],
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.scss',
+    imports: [
+        NgIf,
+        RouterLink,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButton,
+        MatIconButton,
+        MatIcon
+    ]
 })
 export class RegisterComponent {
   form?: FormGroup;
