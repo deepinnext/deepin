@@ -46,7 +46,7 @@ public class HttpGlobalExceptionFilter(ILogger<HttpGlobalExceptionFilter> logger
             var json = new JObject(new JProperty("Messages", ["An error occur.Try it again."]));
             if (env.IsDevelopment())
             {
-                json.Add(new JProperty("Exception", context.Exception));
+                json.Add(new JProperty("Exception", JToken.FromObject(context.Exception)));
             }
             context.Result = new InternalServerErrorObjectResult(json);
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

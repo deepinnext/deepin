@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.note-contaner {
+    flex: 1 1 auto;
+    padding: .75rem;
+}

@@ -4,27 +4,28 @@ using Deepin.Domain.PageAggregates;
 
 namespace Deepin.Infrastructure.Repositories;
 
-public class NoteRepository : INoteRepository
+public class NoteRepository(DeepinDbContext deepinDbContext) : INoteRepository
 {
-    public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+    private readonly DeepinDbContext _dbContext = deepinDbContext;
+    public IUnitOfWork UnitOfWork => _dbContext;
 
-    public Task AddAsync(Note note, CancellationToken cancellationToken = default)
+    public async Task AddAsync(Note note, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        await _dbContext.Notes.AddAsync(note, cancellationToken);
     }
 
     public void Delete(Note post)
     {
-        throw new NotImplementedException();
+        _dbContext.Notes.Remove(post);
     }
 
-    public Task<Note?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<Note?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Notes.FindAsync([id], cancellationToken);
     }
 
     public void Update(Note post)
     {
-        throw new NotImplementedException();
+        _dbContext.Notes.Update(post);
     }
 }

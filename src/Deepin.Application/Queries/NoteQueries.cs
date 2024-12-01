@@ -49,7 +49,8 @@ public class NoteQueries(IMapper mapper, ITagQueries tagQueries, ICategoryQuerie
         {
             query = query.Where(n => n.CategoryId == noteQuery.CategoryId);
         }
-        var pagedNotes = query.Skip(noteQuery.PageIndex * noteQuery.PageSize).Take(noteQuery.PageSize).ToList();
+        var pagedNotes = query.Skip(noteQuery.PageIndex * noteQuery.PageSize).Take(noteQuery.PageSize)
+        .OrderByDescending(s => s.UpdatedAt).ToList();
         var noteDtos = _mapper.Map<IEnumerable<NoteDto>>(pagedNotes);
         var tags = await _tagQueries.GetListAsync(cancellationToken);
         var categories = await _categoryQueries.GetListAsync(cancellationToken);

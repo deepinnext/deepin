@@ -1,1 +1,51 @@
-<p>edit works!</p>
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-actions">
+        <button type="button" mat-icon-button (click)="onLockChange()">
+            <mat-icon>
+                {{ this.form.get('isPublic')?.value ? 'lock' : 'lock_open'}}
+            </mat-icon>
+        </button>
+        <button *ngIf="!isNew" mat-button>Cancel</button>
+        <button type="submit" mat-flat-button>Save</button>
+        <button *ngIf="isNew" type="button" mat-button (click)="onPublish()">Publish</button>
+        <ng-container *ngIf="!isNew">
+            <button mat-icon-button [matMenuTriggerFor]="pageActionMenu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #pageActionMenu="matMenu" xPosition="before" yPosition="below">
+                <button mat-menu-item>
+                    Unpublish
+                </button>
+                <button mat-menu-item>
+                    Archive
+                </button>
+                <button mat-menu-item>
+                    Delete
+                </button>
+            </mat-menu>
+        </ng-container>
+    </div>
+    <div class="form-banner">
+        <h1 contenteditable="true" class="form-field" (input)="onTitleChange($event)">
+            Untitled page.
+        </h1>
+        <p contenteditable="true" class="form-field" (input)="onDescriptionChange($event)">
+            Enter a description for this page.
+        </p>
+    </div>
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tags</mat-label>
+        <mat-chip-grid #reactiveChipGrid aria-label="Enter reactive form keywords" formControlName="tags">
+            @for (tag of tags; track tag) {
+            <mat-chip-row (removed)="removeTag(tag)">
+                {{tag}}
+                <button matChipRemove aria-label="'remove reactive form' + keyword">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip-row>
+            }
+        </mat-chip-grid>
+        <input placeholder="New tag..." [matChipInputFor]="reactiveChipGrid" (matChipInputTokenEnd)="addTag($event)" />
+    </mat-form-field>
+    <quill-editor formControlName="content"></quill-editor>
+</form>

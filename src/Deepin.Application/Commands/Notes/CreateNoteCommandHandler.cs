@@ -1,4 +1,6 @@
+using AutoMapper;
 using Deepin.Application.Commands.Tags;
+using Deepin.Application.Queries;
 using Deepin.Application.Services;
 using Deepin.Domain.NoteAggregates;
 using Deepin.Domain.PageAggregates;
@@ -6,12 +8,13 @@ using MediatR;
 
 namespace Deepin.Application.Commands.Notes;
 
-public class CreateNoteCommandHandler(IMediator mediator, INoteRepository noteRepository, IUserContext userContext) : IRequestHandler<CreateNoteCommand, int>
+public class CreateNoteCommandHandler(IMediator mediator,IMapper mapper, INoteRepository noteRepository, IUserContext userContext) : IRequestHandler<CreateNoteCommand, NoteDto>
 {
     private readonly IMediator _mediator = mediator;
+    private readonly IMapper _mapper = mapper;
     private readonly INoteRepository _noteRepository = noteRepository;
     private readonly IUserContext _userContext = userContext;
-    public async Task<int> Handle(CreateNoteCommand request, CancellationToken cancellationToken)
+    public async Task<NoteDto> Handle(CreateNoteCommand request, CancellationToken cancellationToken)
     {
         var note = new Note(
             userId: _userContext.UserId,
@@ -37,6 +40,6 @@ public class CreateNoteCommandHandler(IMediator mediator, INoteRepository noteRe
         }
         await _noteRepository.AddAsync(note, cancellationToken);
         await _noteRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-        return note.Id;
+        return _mapper.Map<NoteDto>(note);
     }
 }

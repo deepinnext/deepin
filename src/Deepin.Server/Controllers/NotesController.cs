@@ -19,17 +19,17 @@ namespace Deepin.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<ActionResult<NoteDto>> Get(int id, CancellationToken cancellationToken)
         {
             var post = await _noteQueries.GetByIdAsync(id, cancellationToken);
             return post is null ? NotFound() : Ok(post);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(CreateNoteCommand command, CancellationToken cancellationToken)
+        public async Task<ActionResult<NoteDto>> Create(CreateNoteCommand command, CancellationToken cancellationToken = default)
         {
-            var id = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
+            var note = await _mediator.Send(command, cancellationToken);
+            return CreatedAtAction(nameof(Get), new { id = note.Id }, note);
         }
 
         [HttpPut("{id}")]
